@@ -1,0 +1,48 @@
+
+<template>
+  <view id="wrap">
+    <view class="headline">{{getSeleted}}</view>
+    <view>
+      <repeat for="{{getEvents}}"  key="index"  index="index" item="item">
+        <datingEvent :item.sync="item"></datingEvent>
+      </repeat>
+    </view>
+  </view>
+</template>
+<style lang="scss" >
+.headline{
+  margin: 20rpx 0;
+}
+.tips,.headline{
+  text-align: center;
+}
+</style>
+<script>
+import WEPY from 'wepy';
+import DatingEvent from './datingEvent'
+import { connect } from 'wepy-redux';
+@connect({
+  getEvents(state){
+    let events = [];
+    state.calendar.eventList.forEach((e) => {
+      if(e.day == state.calendar.selectedDay){
+        events = e.events;
+      }
+    });
+    return events;
+  },
+  getSeleted(state){
+    return state.calendar.selectedDay;
+  }
+})
+export default class Dating extends WEPY.component{
+   components = {
+      datingEvent:DatingEvent
+    }
+}
+
+</script>
+
+
+
+

@@ -1,0 +1,17 @@
+<style lang="scss">
+
+</style>
+
+<template>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Tab extends wepy.component {
+    props = {
+      grouplist: {},
+      index: {}
+    }
+  }
+</script>

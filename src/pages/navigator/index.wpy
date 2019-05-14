@@ -1,0 +1,60 @@
+<template>
+    <view>
+        <mapCom id="mapConponent" :endPoint.sync="endPoint"></mapCom>
+    </view>
+</template>
+<style lang="scss">
+#mapConponent{
+    width: 750rpx;
+    height: 1334rpx;
+    background: #ccc;
+}
+</style>
+<script>
+
+import WEPY from 'wepy';
+import { createStore, applyMiddleware } from 'redux';
+import { connect } from 'wepy-redux';
+import TxMap from "../../components/map/index";
+import {
+  SET_START_POINT,
+  NAVGTION
+} from '../../store/types/navigation';
+import {
+  act_set_start,
+  act_set_end
+} from '../../store/actions/navigation';
+
+@connect({
+  startPoint(state) {
+    return state.navigation.START_POINT;
+  },
+  endPoint(state) {
+    return state.navigation.END_POINT;
+  }
+})
+export default class Navigator  extends WEPY.page {
+    data = {};
+    config = {
+        navigationBarTitleText: '小程序demo-导航'
+    };
+    components = {
+        mapCom: TxMap
+    };
+    methods = {
+        
+    };
+    // 传递事件
+    events = {
+        navigat:function(navData){
+            // 提交自身定位
+            WEPY.$store.dispatch({
+                type: SET_START_POINT,
+                location: navData
+            });
+            console.log(this.endPoint);
+        }
+    }
+    
+}
+</script>

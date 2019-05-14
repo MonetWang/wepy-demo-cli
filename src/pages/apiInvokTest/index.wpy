@@ -1,0 +1,45 @@
+<style lang="scss">
+
+</style>
+
+<template>
+  <view class="container">
+    <view>
+      <repeat for="{{province}}" key="index" index="index" item="item">
+        <view>province_id: {{item.province_id}}</view>
+      </repeat>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import API from "@/api/index";
+  import {
+    request
+  } from '@/utils/request';
+  export default class APITest extends wepy.page {
+    config = {
+      navigationBarTitleText: '接口调用测试'
+    }
+    data = {
+      province: {}
+    }
+    methods = {}
+    getProvinceList() {
+      return request({
+        url: API.Tool.provinceList
+      }).then(res => {
+        /**
+         * wepy中保留了this.setData()，不建议使用
+         * 直接使用 this.变量名赋值，并且调用 this.$apply()
+         */
+        this.province = res.data;// 设置页面列表的内容
+        this.$apply();
+      })
+    }
+    onLoad() {
+      this.getProvinceList();
+    }
+  }
+</script>

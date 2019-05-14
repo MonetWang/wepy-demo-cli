@@ -1,0 +1,47 @@
+
+<template>
+  <view class="event" id="{{item.id}}">
+    <view class="h1">
+      {{item.topic}}
+    </view>
+    <view class="time">
+      <view>{{item.time}}</view>
+      <view>{{item.address}}</view>
+    </view>
+  </view>
+</template>
+<style lang="scss" >
+.event{
+  width: 680rpx;
+  padding: 5rpx 10rpx;
+  margin: 0 20rpx 20rpx 20rpx;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  .h1{
+    font-size:30rpx;
+    padding: 10rpx;
+    border-bottom: 1px solid #ddd;
+  }
+  .time{
+    font-size:24rpx;
+    padding: 10rpx;
+  }
+}
+
+</style>
+<script>
+import WEPY from 'wepy';
+import { connect } from 'wepy-redux';
+
+export default class DatingEvent extends WEPY.component{
+  props = { // 接收父组件传递下来的数据
+      item:Object
+  };
+}
+
+</script>
+
+
+
+

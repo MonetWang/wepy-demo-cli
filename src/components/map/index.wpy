@@ -1,0 +1,99 @@
+
+
+<template>
+  <view id="wrap">
+    <map
+      id="myMap"
+      markers="{{[endPoint]}}"
+      latitude="{{endPoint.latitude}}"
+      scale="18"
+      longitude="{{endPoint.longitude}}"
+    ></map>
+    <view id="searchBox">
+      <view>
+        <text id="endName">{{endPoint.name}}</text>
+        <text id="endAddres">{{endPoint.address}}</text>
+        <button id="toNav" @tap="navigatorFn()">去这里</button>
+      </view>
+    </view>
+  </view>
+</template>
+<style lang="scss" scoped>
+#wrap {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #ccc;
+}
+#searchBox {
+  position: fixed;
+  bottom: 0;
+  height: 230rpx;
+  z-index: 30;
+  width: 90%;
+  padding: 17rpx 5%;
+  background: #fff;
+}
+#myMap {
+  width: 100%;
+  height: 1100rpx;
+}
+#endName {
+  display: block;
+  font-size: 48rpx;
+  margin-bottom: 10rpx;
+}
+#endAddres {
+  display: block;
+  font-size: 24rpx;
+  margin-bottom: 10rpx;
+}
+</style>
+
+<script>
+import WEPY from 'wepy';
+export default class TxMap extends WEPY.component {
+  data = {};
+  onLoad() {
+    this.mapCtx = wx.createMapContext('myMap');
+  }
+  computed = {
+    bodyHeight: function() {
+      let height = 0;
+      wx.getSystemInfo({
+        success: function(res) {
+          height = (750 * res.windowHeight) / res.windowWidth;
+        }
+      });
+      return height;
+    }
+  };
+  methods = {
+    navigatorFn: function() {
+      var that = this;
+      // 获取经纬度
+      wx.getLocation({
+        type: 'gcj02',
+        success: function(res) {
+          var latitude = res.latitude;
+          var longitude = res.longitude;
+          that.$emit('navigat', {
+            latitude: res.latitude,
+            longitude: res.longitude
+          });
+        }
+      });
+    }
+  };
+  props = {
+    // 接收父组件传递下来的数据
+    endPoint: Object
+  };
+}
+</script>
+
+
+
+
+
+

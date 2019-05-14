@@ -1,0 +1,239 @@
+<template>
+  <view>
+    <CalendarCom :calendarData.sync="calendarData" :setToday="propSetToday" :propSelectedDay="propSelectedDay" ></CalendarCom>
+    <DatingCom></DatingCom>
+  </view>
+</template>
+<style lang="scss">
+</style>
+<script>
+import WEPY from 'wepy';
+import Calendar from '../../components/calendar/index';
+import Dating from '../../components/calendar/dating';
+import { connect } from 'wepy-redux';
+import { SET_TODAY,SET_DATE_SELECTED,SET_EVENT} from '../../store/types/calendar';
+
+@connect({
+  getToday(state) {
+    return state.calendar.today;
+  },
+  getSelected(state) {
+    return state.calendar.selectedDay;
+  },
+  getEvents(state){
+    return state.calendar.eventList;
+  }
+})
+export default class dateCom extends WEPY.page {
+  data = {
+    calendarData: {
+      today: '2019-04-03',
+      dating: [
+        {
+          day: '2019-03-07',
+          events: [
+            {
+              topic: '春季积分活动',
+              id: '19030701',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-03-12',
+          events: [
+            {
+              topic: '春季积分活动',
+              id: '19031201',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-03-19',
+          events: [
+            {
+              topic: '春季积分活动',
+              id: '19031901',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-03-23',
+          events: [
+            {
+              topic: '春季积分活动',
+              id: '19032301',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-03-30',
+          events: [
+            {
+              topic: '春季积分活动',
+              id: '19033001',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-04-01',
+          events: [
+            {
+              topic: '春季积分活动',
+              id: '19040101',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            },
+            {
+              topic: '春季积分活动1',
+              id: '19040102',
+              time: '14:00-15:00',
+              address: '1座1层星巴克'
+            },
+            {
+              topic: '春季积分活动2',
+              id: '19040103',
+              time: '18:00-22:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-04-05',
+          events: [
+            {
+              topic: '22春季积分活动',
+              id: '19040501',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            },
+            {
+              topic: '122春季积分活动1',
+              id: '19040502',
+              time: '14:00-15:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-04-07',
+          events: [
+            {
+              topic: '11aa22春季积分活动',
+              id: '19040701',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            },
+            {
+              topic: '122春季积分活动1',
+              id: '19040702',
+              time: '14:00-15:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-04-12',
+          events: [
+            {
+              topic: '11aa22春季积分活动',
+              id: '19041201',
+              time: '12:00-13:00',
+              address: '1座1层星巴克'
+            },
+            {
+              topic: '122春季积分活动1',
+              id: '19041202',
+              time: '14:00-15:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-04-18',
+          events: [
+            {
+              topic: '作为一名前端开发者',
+              id: '19041801',
+              time: '18:00-23:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        },
+        {
+          day: '2019-04-26',
+          events: [
+            {
+              topic: '具体应该怎么去实现这样的功',
+              id: '19042601',
+              time: '18:00-23:00',
+              address: '1座1层星巴克'
+            }
+          ]
+        }
+      ],
+    }
+  };
+  onLoad = function() {
+    const c_Time = new Date(this.data.calendarData.today);
+    this.data.calendarData.today = c_Time.getFullYear() + '-' + (c_Time.getMonth() + 1) + '-' + c_Time.getDate();
+    // 提交今天
+    this.methods.setToday(this.data.calendarData.today);
+    // 保存事件
+    this.methods.setEvents(this.data.calendarData.dating);
+  };
+  methods = {
+    setToday: day => {
+      WEPY.$store.dispatch({
+        type: SET_TODAY,
+        day: this.data.calendarData.today
+      });
+    },
+    selectedDay: day => {
+      WEPY.$store.dispatch({
+        type: SET_DATE_SELECTED,
+        day
+      });
+    },
+    setEvents: eventList => {
+      WEPY.$store.dispatch({
+        type: SET_EVENT,
+        eventList
+      });
+    },
+    getDayEvent:(day)=>{
+      let dayEvents = {};
+      this.getEvents.forEach((e)=>{
+          if(e.day == day) {
+              dayEvents = e.events;
+          }
+      });
+      return dayEvents;
+    }
+  };
+  config = {
+    navigationBarTitleText: '小程序demo-日历'
+  };
+  components = {
+    CalendarCom: Calendar,
+    DatingCom:Dating
+  };
+  events = {
+    propSetToday: day => {
+      this.methods.setToday(day);
+    },
+    propSelectedDay: day => {
+      this.methods.selectedDay(day);
+    }
+  };
+}
+</script>
