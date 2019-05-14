@@ -26,24 +26,8 @@ export default class Index extends wepy.page {
   data = {
     navlist: [
       {
-        name: '轮播图',
-        link: '../pages/swiperPage/index'
-      },
-      {
         name: '从服务端获取省市id',
         link: '../pages/apiInvokTest/index'
-      },
-      {
-        name: '导航功能',
-        link: '../pages/navigator/index'
-      },
-      {
-        name: '日历功能(简易版)',
-        link: '../pages/calendar/index'
-      },
-      {
-        name: '视频播放(插件需授权才可使用)',
-        link: '../pages/video/index'
       }
     ]
   };

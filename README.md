@@ -10,7 +10,8 @@
 ├── dist                   小程序运行代码目录
 ├── node_modules
 ├── src                    代码编写的目录（该目录为使用WePY后的开发目录）
-|   ├── api                接口路由
+|   ├── api                api接口地址
+|   ├── env                环境配置
 |   ├── common             公共方法
 |   ├── components         WePY组件目录
 |   |   ├── com_a.wpy      可复用的WePY组件a
@@ -58,7 +59,11 @@
 格式化 .wpy 文件的插件
 ```
 
-### 四、微信开发者工具
+### 四、实现功能
+1. 环境配置
+2. 基于`wepy.request`封装Ajax
+
+### 五、微信开发者工具
 1. 下载地址：https://servicewechat.com/wxa-dev-logic/download_redirect?type=x64&from=mpwiki&download_version=1021902010&version_type=1
 
 2. 使用指南：
@@ -69,7 +74,7 @@
 
     (3) 相关文档： https://developers.weixin.qq.com/miniprogram/dev/devtools/sandbox.html?t=19032513
 
-### 五、相关文档
+### 六、相关文档
 开发文档：https://tencent.github.io/wepy/index.html
 
 问题文档：https://github.com/Tencent/wepy/issues

@@ -24,11 +24,7 @@
     config = {
       pages: [
         'pages/index',
-        'pages/calendar/index',
-        'pages/swiperPage/index',
         'pages/apiInvokTest/index',
-        'pages/navigator/index',
-        'pages/video/index'
       ],
       window: {
         backgroundTextStyle: 'light',
@@ -36,11 +32,6 @@
         navigationBarTitleText: 'WeChat',
         navigationBarTextStyle: 'black'
       },
-      permission: {
-      "scope.userLocation": {
-        "desc": "你的位置信息将用于定位效果展示"
-      }
-    },
       plugins: {
         /* 插件需授权才可使用
         "tencentvideo": {

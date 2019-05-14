@@ -1,5 +1,5 @@
 exports.envConfig = {
   name: 'uat',
-  api: 'http://api.ecpt.wm-imotor.com',
+  api: 'http://api.uat.com',
   host: 'http://host.test.com',
 }

@@ -1,5 +1,5 @@
 exports.envConfig = {
   name: 'dev',
-  api: 'http://api.ecpd.wm-imotor.com',
+  api: 'http://api.dev.com',
   host: 'http://host.test.com',
 };

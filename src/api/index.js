@@ -7,6 +7,6 @@ export default {
     regist: API + '/api/regist',
   },
   Tool: {
-    provinceList: API + '/ecp-car/v1/tDmsDe007/tagProvinceCity/ECP_ONLINE',
+    provinceList: API + '/province',
   }
 }
